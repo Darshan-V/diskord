@@ -12,4 +12,4 @@ For Frontend:
 
 
 Api guide
-1. use localhost://3001 to interact with backend now
+1. use localhost://3000 to interact with backend server for now
