@@ -1,12 +1,13 @@
 import React from "react"
-import ServerSidebar from "./components/ServerSidebar"
+import { Routes, Route } from "react-router-dom"
+import ServerSidebar from "./components/ServerSideBar/ServerSidebar"
+import ChannelPane from "./components/Channels/ChannelPane.js"
 
 function App() {
   return (
-    <div className="App">
-      <div className="w-full h-screen bg-[#28292d]">
-        <ServerSidebar />
-      </div>
+    <div className="flex w-screen h-screen bg-[#28292d]">
+      <ServerSidebar />
+      <ChannelPane />
     </div>
   )
 }
