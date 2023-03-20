@@ -1,0 +1,15 @@
+
+For backend:
+
+1. npm install
+
+
+For Frontend:
+
+// add your setup instructions here
+
+
+
+
+Api guide
+1. use localhost://3001 to interact with backend now
