@@ -1,0 +1,23 @@
+
+
+Api guide:
+
+socket resource identifiers:
+
+PATH            ACTION
+
+'message'       : sending a new socket message from server. Frontend listens to the message
+
+ex: from backend
+socket.emit('message', {type: 'offer', ....})
+on Frontend
+socket.on('message', () => {....do something})
+
+message types:
+
+'offer'
+'answer'
+'candidate'
+
+
+Use localhost://3000 to interact with backend server for now
