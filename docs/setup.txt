@@ -7,9 +7,3 @@ For backend:
 For Frontend:
 
 // add your setup instructions here
-
-
-
-
-Api guide
-1. use localhost://3000 to interact with backend server for now
