@@ -5,7 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-test-front-end
+# test-front-end
 webrtc-for-the-curious.pdf
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

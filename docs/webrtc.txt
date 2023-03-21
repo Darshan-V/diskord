@@ -18,3 +18,21 @@
 
 10) Start communication: Once the connection is established, each peer can start sending media streams and data over the connection.
 
+
+
+* peerConnection.createOffer()
+
+1. It is a method used in WebRTC (Web Real-Time Communication) technology to initiate a connection between two devices 
+   (known as peers) that want to communicate through a video, audio, or data stream.
+
+2. When a user wants to establish a connection with another user, they first create a peerConnection object, 
+   which represents the connection between the two peers. Once the peerConnection object is created, the user can
+   call the createOffer() method on it to generate an SDP (Session Description Protocol) offer.
+
+3. The SDP offer contains information about the user's capabilities and preferences for the type of communication 
+   they want to establish, such as the type of media (audio or video), the preferred encoding format, and the desired 
+   bandwidth. The SDP offer is then sent to the other peer, who can review the offer and either accept it or modify it
+   by creating an SDP answer using the createAnswer() method.
+
+4. By exchanging SDP offers and answers, the two peers negotiate the terms of the connection and establish a session 
+   that can be used for real-time communication.
