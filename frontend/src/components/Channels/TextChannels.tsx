@@ -7,13 +7,28 @@ import {
   AccordionIcon,
   Box
 } from "@chakra-ui/react"
+import { useSelector } from "react-redux"
+
+import { useAppSelector } from "../../store/store"
+import diskData from "../../diskData.json"
 
 const TextChannels = () => {
-  const channelsList: string[] = ["general", "qna", "help"]
+  interface dState {
+    activeServer: string
+    activeChannel: string
+  }
+
+  const diskordState = useSelector((state: dState) => state)
+
+  let serverId: string = diskordState.activeServer
+  const serverGroup = diskData.find(
+    (item) => item.id === Number(serverId)
+  )
+  const channelsList = serverGroup?.channels
+
   return (
     <Accordion
       defaultIndex={[0]}
-      allowMultiple
       allowToggle
       className="pt-3"
     >
@@ -34,13 +49,13 @@ const TextChannels = () => {
         </h2>
         <AccordionPanel pb={4}>
           <ul>
-            {channelsList.map((channel, i) => (
+            {channelsList?.map((channel, i) => (
               <div
                 key={i}
                 className="flex w-full h-10 hover:bg-[#494a4d] hover:cursor-pointer hover:rounded-lg"
               >
                 <span className="my-auto p-2 text-md text-[#919395] hover:text-white hover:cursor-pointer">
-                  {" "}
+                  {"# "}
                   {channel}
                 </span>
               </div>

@@ -1,8 +1,22 @@
 import React from "react"
 import { MdOutlineAdd } from "react-icons/md"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+
+import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
+import { AppDispatch } from "../../store/store"
+import diskData from "./../../diskData.json"
 
 const ServerIcons = () => {
-  const servers = ["one", "two", "three"]
+  const servers = diskData
+
+  const navigate = useNavigate()
+  const dispatch: AppDispatch = useDispatch()
+
+  function handleClickServer(id: number) {
+    dispatch(setSelectedServer(id))
+    navigate(`channels/${id}`)
+  }
 
   return (
     <div>
@@ -11,12 +25,15 @@ const ServerIcons = () => {
           <div
             key={i}
             className="flex w-20 h-20 hover:cursor-pointer"
+            onClick={() => {
+              handleClickServer(space?.id)
+            }}
           >
             {/* <div className="w-1 h-14 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
             {/* <div className="w-1 h-2 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
             <div className="flex m-auto w-14 h-14 bg-slate-700 rounded-2xl shadow-xl ">
               <span className="font-sans font-semibold text-xl text-white w-6 h-6 m-auto overflow-x-hidden overflow-y-hidden">
-                {space}
+                {space?.serverName}
               </span>
             </div>
           </div>

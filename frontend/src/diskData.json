@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "serverName": "one",
+    "channels": ["general", "random", "javascript"]
+  },
+  {
+    "id": 2,
+    "serverName": "two",
+    "channels": ["two-general", "random", "javascript"]
+  },
+  {
+    "id": 3,
+    "serverName": "three",
+    "channels": ["three-general", "random", "javascript"]
+  },
+  {
+    "id": 4,
+    "serverName": "four",
+    "channels": ["four-general", "random", "javascript"]
+  },
+  {
+    "id": 5,
+    "serverName": "five",
+    "channels": ["five-general", "random", "javascript"]
+  }
+]
