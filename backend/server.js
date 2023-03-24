@@ -1,67 +1,36 @@
 import express from "express"
-import { createServer } from "http"
-import cors from "cors"
+import { ExpressPeerServer } from "peer"
+import http from "http"
 import { Server } from "socket.io"
+import cors from "cors"
+import config from "./config.js"
+
+const PORT = config.port
 
 const app = express()
-app.use(cors({ origin: ["http://localhost:3001"] }))
+app.use(cors({ origin: config.ORIGIN }))
 app.use(express.json())
 
-const httpServer = createServer(app)
-const io = new Server(httpServer, {
-  cors: { origin: ["http://localhost:3001"] }
-})
+const httpServer = http.createServer(app)
 
-let connectedSockets = []
+const peerServer = ExpressPeerServer(httpServer)
+
+const io = new Server(httpServer, { cors: { origin: config.ORIGIN } })
 
 io.on("connection", (socket) => {
-  // console.log("socket connected", socket.id);
-  connectedSockets.push(socket)
-  // connectedSockets.forEach((connectedSocket) =>
-  //   console.log(connectedSocket.id)
-  // );
-
-  socket.on("answer", (answer) => {
-    //
-  })
-
-  socket.on("offer", (offer) => {
-    // console.log("recieved offer", offer, "\n");
-    // sending offer sdp to all connected clients offer ={type: '...', sdp: '...'}
-    connectedSockets
-      .filter(
-        (connectedSocket) => connectedSocket !== socket
-      )
-      .forEach((connectedSocket) =>
-        connectedSocket.emit("message", offer)
-      )
-  })
-
-  socket.on("iceCandidate", (data) => {
-    // console.log("iceCandidate:", data.candidate, "\n");
-    connectedSockets
-      .filter(
-        (connectedSocket) => connectedSocket !== socket
-      )
-      .forEach((connectedSocket) =>
-        connectedSocket.emit("iceCandidate", data)
-      )
-  })
+  console.log(`Socket connected: ${socket.id}`)
 
   socket.on("disconnect", () => {
-    // console.log("socket disconnected", socket.id);
-    connectedSockets = connectedSockets.filter(
-      (connectedSocket) => connectedSocket !== socket
-    )
+    console.log(`Socket disconnected: ${socket.id}`)
   })
-
-  //
 })
 
-httpServer.listen(3000, (err) => {
-  if (err) {
-    console.log(err)
-    return
-  }
-  console.log("listening on port:", 3000)
+app.use("/api/peer", peerServer) // mounting the peerjs server on the path /api/peer
+
+app.get("/api", (req, res) => {
+  res.send("Hello, World!")
+})
+
+httpServer.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`)
 })
