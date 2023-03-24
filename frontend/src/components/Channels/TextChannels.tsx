@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react"
 import { useSelector } from "react-redux"
 
-import { useAppSelector } from "../../store/store"
 import diskData from "../../diskData.json"
 
 const TextChannels = () => {
