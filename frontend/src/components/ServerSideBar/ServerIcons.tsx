@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
-import { AppDispatch } from "../../store/store"
+import { useAppDispatch } from "../../store/store"
 import diskData from "./../../diskData.json"
 
 const ServerIcons = () => {
   const servers = diskData
 
   const navigate = useNavigate()
-  const dispatch: AppDispatch = useDispatch()
+  const dispatch: useAppDispatch = useDispatch()
 
   function handleClickServer(id: number) {
     dispatch(setSelectedServer(id))
