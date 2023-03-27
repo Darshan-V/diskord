@@ -27,8 +27,8 @@ const TextChannels = () => {
 
   return (
     <Accordion
-      defaultIndex={[0]}
-      allowToggle
+      defaultIndex={[1]}
+      allowToggle={true}
       className="pt-3"
     >
       <AccordionItem borderColor="#3f4147">
@@ -47,7 +47,7 @@ const TextChannels = () => {
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>
-          <ul>
+          <div>
             {channelsList?.map((channel, i) => (
               <div
                 key={i}
@@ -59,7 +59,7 @@ const TextChannels = () => {
                 </span>
               </div>
             ))}
-          </ul>
+          </div>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
