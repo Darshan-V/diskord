@@ -9,7 +9,7 @@ function App() {
       <LeftNavbar />
       <Routes>
         <Route
-          path="/channels/:channleId"
+          path="/diskord/servers/:serverId"
           element={<MessageInput />}
         />
       </Routes>
