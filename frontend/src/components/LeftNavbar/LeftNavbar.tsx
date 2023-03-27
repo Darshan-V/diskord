@@ -4,7 +4,7 @@ import ServerSidebar from "../ServerSideBar/ServerSidebar"
 
 const LeftNavbar = () => {
   return (
-    <div className="flex flex-row h-screen">
+    <div className="flex h-screen">
       <ServerSidebar />
       <ChannelPane />
     </div>

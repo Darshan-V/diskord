@@ -19,7 +19,7 @@ const TextChannels = () => {
 
   const diskordState = useSelector((state: dState) => state)
 
-  let serverId: string = diskordState.activeServer
+  const serverId: string = diskordState.activeServer
   const serverGroup = diskData.find(
     (item) => item.id === Number(serverId)
   )
@@ -40,8 +40,9 @@ const TextChannels = () => {
               textAlign="left"
               color="gray.400"
               className=" hover:text-white"
+              fontSize="sm"
             >
-              Channels
+              Text Channels
             </Box>
             <AccordionIcon />
           </AccordionButton>

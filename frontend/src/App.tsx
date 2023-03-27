@@ -1,7 +1,7 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
 import LeftNavbar from "./components/LeftNavbar/LeftNavbar"
-import MessageInput from "./components/Message/MessageInput"
+import MessagesContainer from "./components/Message/MessagesContainer"
 
 function App() {
   return (
@@ -9,8 +9,8 @@ function App() {
       <LeftNavbar />
       <Routes>
         <Route
-          path="/channels/:channleId"
-          element={<MessageInput />}
+          path="/channels/:channelId"
+          element={<MessagesContainer />}
         />
       </Routes>
     </div>
