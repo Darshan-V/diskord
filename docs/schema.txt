@@ -1,0 +1,3 @@
+users  {userName, userId, email, password}
+sessions {sessionId, userId}
+
