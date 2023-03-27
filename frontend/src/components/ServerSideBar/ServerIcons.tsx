@@ -1,10 +1,10 @@
 import React from "react"
-import { MdOutlineAdd } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
 import { useAppDispatch } from "../../store/store"
+import CreateServer from "./CreateServer"
 import diskData from "./../../diskData.json"
 
 const ServerIcons = () => {
@@ -15,7 +15,7 @@ const ServerIcons = () => {
 
   function handleClickServer(id: number) {
     dispatch(setSelectedServer(id))
-    navigate(`channels/${id}`)
+    navigate(`/diskord/servers/${id}`)
   }
 
   return (
@@ -39,9 +39,7 @@ const ServerIcons = () => {
           </div>
         ))}
         <div className="flex w-20 h-20 hover:cursor-pointer">
-          <div className="flex m-auto w-14 h-14 bg-slate-700 rounded-full shadow-xl">
-            <MdOutlineAdd className="m-auto text-3xl font-semibold text-green-500" />
-          </div>
+          <CreateServer />
         </div>
       </ul>
     </div>

@@ -9,8 +9,13 @@ function App() {
       <LeftNavbar />
       <Routes>
         <Route
+<<<<<<< HEAD
           path="/channels/:channelId"
           element={<MessagesContainer />}
+=======
+          path="/diskord/servers/:serverId"
+          element={<MessageInput />}
+>>>>>>> frontend
         />
       </Routes>
     </div>
