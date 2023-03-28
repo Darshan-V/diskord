@@ -3,9 +3,12 @@ import ServerIcons from "./ServerIcons"
 
 const ServerSidebar = () => {
   return (
-    <nav className="h-full w-20 bg-[#1E1F22]">
+<<<<<<< HEAD
+=======
+    <div className="flex flex-col h-full w-20 bg-[#1E1F22]">
+>>>>>>> frontend
       <ServerIcons />
-    </nav>
+    </div>
   )
 }
 
