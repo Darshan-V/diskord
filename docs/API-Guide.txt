@@ -3,13 +3,12 @@ workspaces ---> channelType --->channels(rooms) ---> msgs
 
 
 ----------------------------------------------------------------------------------------------------------
-# LANDING PAGE REQUESTS AFTER LOGIN
 
                         * GET-WORKSPACE-LIST
 
 GET           /api/workspaces                    getWorkspacesList
 
-- API response example: { "workspaces": [{wspId, wspName}, { wspId, wspName } .....]}
+- API response example: {  workspaces: [{ 1: "wsp1" }, { 2: "wsp2" }, { 2: "wsp2" }] }
 
 ----------------------------------------------------------------------------------------------------------
                         * ADD-NEW-WORKSPACE
