@@ -1,8 +1,49 @@
 
-Use localhost://3000 to interact with backend server for now
-
-Api guide:
+workspaces ---> channelType --->channels(rooms) ---> msgs 
 
 
+----------------------------------------------------------------------------------------------------------
+# LANDING PAGE REQUESTS AFTER LOGIN
+
+                        * GET-WORKSPACE-LIST
+
+GET           /api/workspaces                    getWorkspacesList
+
+- API response example: { "workspaces": [{wspId, wspName}, { wspId, wspName } .....]}
+
+----------------------------------------------------------------------------------------------------------
+                        * ADD-NEW-WORKSPACE
+
+POST          /api/workspaces                    addNewWorkSpace
+
+- API request body: {workspaceName}
+
+----------------------------------------------------------------------------------------------------------
+
+                        * GET FRIENDS LIST (names, olineStatus): (FOR DM WORKSPACE)
+
+GET  /api/contacts                 
+
+- Api response example:    {"contacts": [{contactId, contactName}, {....}, ......]}                                     
+
+----------------------------------------------------------------------------------------------------------
+
+                        * GET FRIENDS DM MESSAGES:
+
+GET  /api/contacts/contactId/messages    
+
+- Api response example:   {"messages": [ { msgId, msgTime, msgTxt, msgType }, {.....}, ........]}
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+                        * GET SELECTED WORKSPACE
+
+WORKSPACE
+
+GET           /api/workspaces/wspId              
+
+- Api response example: {"channelType1": [{roomId, roomName}, {roomId, roomName},.....], "channelType2": [......], .....}
 
 
