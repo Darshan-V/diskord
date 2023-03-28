@@ -1,25 +1,27 @@
 import { createServer } from "http"
-import { Server } from "socket.io"
 import express from "express"
 import cors from "cors"
+import sockets from "./sockets/sockets.js"
+import { router as workSpaceRouter } from "./routes/workSpaces.js"
 
 const app = express()
 app.use(cors({ origin: "http://localhost:3001" }))
 app.use(express.json())
 
-const httpServer = createServer(app)
+app.use("/api/workspaces", workSpaceRouter)
 
-const io = new Server(httpServer, {
-  cors: {
-    origin: ["http://localhost:3001"]
-  }
-})
+const httpServer = createServer(app)
+sockets.init(httpServer)
+
+const io = sockets.get()
 
 io.on("connection", (socket) => {
   console.log("socket connected:", socket.id)
-})
 
-app.get("")
+  socket.on("join-room", () => {
+    //
+  })
+})
 
 httpServer.listen(3000, () => {
   console.log("listening on localhost:3000")
