@@ -19,6 +19,8 @@ io.on("connection", (socket) => {
   console.log("socket connected:", socket.id)
 })
 
+app.get("")
+
 httpServer.listen(3000, () => {
   console.log("listening on localhost:3000")
 })
