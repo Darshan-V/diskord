@@ -1,53 +1,65 @@
-import express from "express"
-import { ExpressPeerServer } from "peer"
-import http from "http"
+import { createServer } from "http"
 import { Server } from "socket.io"
+import express from "express"
 import cors from "cors"
-import config from "./config.js"
-
-const PORT = config.port
 
 const app = express()
-// app.use(cors({ origin: ["http://localhost:3001"] }))
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001")
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type")
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//   next()
-// })
-
+app.use(cors({ origin: "http://localhost:3001" }))
 app.use(express.json())
 
-const httpServer = http.createServer(app)
-
-const peerServer = ExpressPeerServer(httpServer)
+const httpServer = createServer(app)
 
 const io = new Server(httpServer, {
-  cors: { origin: ["http://localhost:3000"] }
+  cors: {
+    origin: ["http://localhost:3001"]
+  }
 })
 
 io.on("connection", (socket) => {
-  console.log(`Socket connected: ${socket.id}`)
-
-  socket.on("disconnect", () => {
-    console.log(`Socket disconnected: ${socket.id}`)
-  })
+  console.log("socket connected:", socket.id)
 })
 
-app.use("/api/peer", peerServer) // mounting the peerjs server on the path /api/peer
-
-peerServer.on("connection", (client) => {
-  console.log("PeerClient connected", client.getId())
+httpServer.listen(3000, () => {
+  console.log("listening on localhost:3000")
 })
 
-peerServer.on("disconnect", (client) => {
-  console.log("PeerClient disconnected")
-})
+// import express from "express"
+// import { ExpressPeerServer } from "peer"
+// import http from "http"
+// import { Server } from "socket.io"
+// import cors from "cors"
+// import config from "./config.js"
 
-app.get("/api", (req, res) => {
-  res.send("Hello, World!")
-})
+// const PORT = config.port
 
-httpServer.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
-})
+// const app = express()
+// app.use(cors({ origin: "*" }))
+
+// app.use(express.json())
+
+// const httpServer = http.createServer(app)
+
+// const io = new Server(httpServer, {
+//   cors: { origin: "*" }
+// })
+
+// const chatIo = io.of("/chat")
+
+// chatIo.on("connected", (socket) => {
+//   console.log("connected:", socket.id)
+// })
+
+// const peerServer = ExpressPeerServer(httpServer)
+// app.use("/api/peer", peerServer) // mounting the peerjs server on the path /api/peer
+
+// peerServer.on("connection", (client) => {
+//   console.log("PeerClient connected", client.getId())
+// })
+
+// peerServer.on("disconnect", (client) => {
+//   console.log("PeerClient disconnected")
+// })
+
+// httpServer.listen(PORT, () => {
+//   console.log(`Server listening on port ${PORT}`)
+// })
