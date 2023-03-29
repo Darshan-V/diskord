@@ -1,5 +1,5 @@
 
-workspaces ---> channelType --->channels(rooms) ---> msgs 
+Backend Server runs on http://localhost:3000
 
 
 ----------------------------------------------------------------------------------------------------------
@@ -46,3 +46,10 @@ GET           /api/workspaces/wspId
 - Api response example: {"channelType1": [{roomId, roomName}, {roomId, roomName},.....], "channelType2": [......], .....}
 
 
+
+
+// sockets
+
+resourcePath
+
+'join-channel' 
