@@ -27,7 +27,7 @@ GET  /api/contacts
 
 ----------------------------------------------------------------------------------------------------------
 
-                        * GET FRIENDS DM MESSAGES:
+                                * GET FRIENDS DM MESSAGES:
 
 GET  /api/contacts/contactId/messages    
 
@@ -35,9 +35,7 @@ GET  /api/contacts/contactId/messages
 
 ----------------------------------------------------------------------------------------------------------
 
-
-
-                        * GET SELECTED WORKSPACE
+                                    * GET SELECTED WORKSPACE
 
 WORKSPACE
 
@@ -50,6 +48,6 @@ GET           /api/workspaces/wspId
 
 // sockets
 
-resourcePath
+resourcePath                        action
 
-'join-channel' 
+'join-channel'                      join a channel
