@@ -5,7 +5,7 @@ import sockets from "./sockets/sockets.js"
 import { router as workSpaceRouter } from "./routes/workSpaces.js"
 
 const app = express()
-app.use(cors({ origin: "http://localhost:3001" }))
+app.use(cors({ origin: "http://localhost:5173" }))
 app.use(express.json())
 
 app.use("/api/workspaces", workSpaceRouter)
