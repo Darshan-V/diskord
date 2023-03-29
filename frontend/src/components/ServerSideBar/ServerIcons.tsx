@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch,useSelector } from "react-redux"
 import { Tooltip } from "@chakra-ui/react"
 
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
@@ -13,6 +13,16 @@ const ServerIcons = () => {
 
   const navigate = useNavigate()
   const dispatch: useAppDispatch = useDispatch()
+
+  interface dState {
+    activeServer: string
+    activeChannel: string
+  }
+
+  const diskordState = useSelector((state:dState)=>state)
+  const activeServer = Number(diskordState.activeServer)
+  
+  
 
   function handleClickServer(id: number) {
     dispatch(setSelectedServer(id))
@@ -30,7 +40,8 @@ const ServerIcons = () => {
               handleClickServer(space?.id)
             }}
           >
-            {/* <div className="w-1 h-14 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
+            {space.id === activeServer?
+            <div className="w-1 h-14 bg-white my-auto rounded-tr-xl rounded-br-xl"></div>:null}
             {/* <div className="w-1 h-2 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
             <Tooltip
               label={space?.serverName}
