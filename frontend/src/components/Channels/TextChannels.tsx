@@ -19,7 +19,7 @@ const TextChannels = () => {
 
   const diskordState = useSelector((state: dState) => state)
 
-  let serverId: string = diskordState.activeServer
+  const serverId: string = diskordState.activeServer
   const serverGroup = diskData.find(
     (item) => item.id === Number(serverId)
   )
@@ -27,8 +27,8 @@ const TextChannels = () => {
 
   return (
     <Accordion
-      defaultIndex={[0]}
-      allowToggle
+      defaultIndex={[1]}
+      allowToggle={true}
       className="pt-3"
     >
       <AccordionItem borderColor="#3f4147">
@@ -40,14 +40,15 @@ const TextChannels = () => {
               textAlign="left"
               color="gray.400"
               className=" hover:text-white"
+              fontSize="sm"
             >
-              Channels
+              Text Channels
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>
-          <ul>
+          <div>
             {channelsList?.map((channel, i) => (
               <div
                 key={i}
@@ -59,7 +60,7 @@ const TextChannels = () => {
                 </span>
               </div>
             ))}
-          </ul>
+          </div>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
