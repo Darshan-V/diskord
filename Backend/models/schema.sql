@@ -3,6 +3,8 @@ drop table channel_category cascade;
 drop table channels cascade;
 drop table users cascade;
 drop table user_work_spaces cascade;
+drop table user_channels cascade;
+drop table channel_messages cascade;
 
 
 create table users (
@@ -68,3 +70,17 @@ create table channel_messages(
     constraint fk_messages_channels foreign key(channel_id) references channels(channel_id)
 );
 
+create table user_channels(
+    user_id         integer,
+    channel_id      integer,
+
+    primary key(user_id, channel_id),
+    constraint fk_user_channels_users foreign key(user_id) references users(user_id),
+    constraint fk_user_channels_channels foreign key(channel_id) references channels(channel_id)
+)
+
+
+-- create table dm_messages(
+--     msg_id serial primary key,
+
+-- )
