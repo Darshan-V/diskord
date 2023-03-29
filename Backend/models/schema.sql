@@ -15,6 +15,12 @@ create table users (
     email                   varchar -- ideally not null
 );
 
+-- insert 2 users
+insert into users(user_name, password) values ('user1', 'password1');
+insert into users(user_name, password) values ('user2', 'password2');
+select * from users;
+
+
 create table workspaces(
     workspace_id            serial primary key,
     workspace_name          varchar unique not null,
@@ -23,6 +29,14 @@ create table workspaces(
 
     constraint fk_workspaces_users foreign key(admin_id) references users(user_id)
 );
+
+-- insert workspaces
+insert into workspaces(workspace_name, admin_id) values ('wsp1', 1);
+insert into workspaces(workspace_name, admin_id) values ('wsp2', 1);
+insert into workspaces(workspace_name, admin_id) values ('wsp3', 2);
+insert into workspaces(workspace_name, admin_id) values ('wsp4', 2);
+select * from workspaces;
+
 
 create table channel_category(
     channel_group_id        serial primary key,
