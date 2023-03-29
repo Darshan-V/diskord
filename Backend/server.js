@@ -18,8 +18,28 @@ const io = sockets.get()
 io.on("connection", (socket) => {
   console.log("socket connected:", socket.id)
 
-  socket.on("join-room", () => {
-    //
+  socket.on("join-channel", (channelId) => {
+    socket.join(channelId)
+    socket.channelId = channelId
+
+    const msg = {
+      msgTxt: "user joined",
+      msgTime: Date.now(),
+      channelId: channelId,
+      logMsg: true
+    }
+    socket.to(channelId).emit("join-channel", msg)
+  })
+
+  socket.on("new-msg", (msg) => {
+    const newMsg = {
+      msgTxt: msg.msg_txt,
+      msgTime: Date.now(),
+      channelId: channelId.roomId,
+      roomMsg: false
+    }
+
+    socket.to(socket.roomId).emit("broadcast-msg", newMsg)
   })
 })
 
