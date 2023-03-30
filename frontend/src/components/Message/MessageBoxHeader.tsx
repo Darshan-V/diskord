@@ -35,6 +35,7 @@ const MessageBoxHeader = () => {
   interface dState {
     activeServer: string
     activeChannel: string
+    socket: {}
   }
 
   const channelState = useSelector((state: dState) => state)

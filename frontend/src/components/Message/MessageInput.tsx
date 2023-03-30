@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { io, Socket } from "socket.io-client"
 import { Input, InputGroup } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useAppDispatch } from "../../store/store"
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
 
-const socket = io("http://localhost:3000")
+// const socket = io("http://localhost:3000")
 
 const MessageInput = () => {
   const [value, setValue] = useState("")
@@ -14,18 +13,23 @@ const MessageInput = () => {
   const params = useParams()
   const dispatch: useAppDispatch = useDispatch()
 
+  interface dState {
+    activeServer: string
+    activeChannel: string
+  }
+  const diskordState = useSelector((state: dState) => state)
+  const socket = useSelector((state: any) => state.socket)
+
   useEffect(() => {
     if (params) {
       dispatch(setSelectedServer(params.serverId))
     }
 
-    socket.connect()
-
     socket.on("connect", () => {
       console.log("socketId", socket.id)
     })
 
-    socket.on("join-channel", (msg) => {
+    socket.on("join-channel", (msg: any) => {
       console.log(msg)
     })
   }, [])
@@ -36,11 +40,22 @@ const MessageInput = () => {
     setValue(event.target.value)
   }
 
+  interface newMsg {
+    msgTxt: string
+    channelId: number
+  }
+
+  let newMessage: newMsg = {
+    msgTxt: value,
+    channelId: Number(diskordState.activeChannel)
+  }
+
   const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
     // console.log(value)
+    socket.emit("new-msg", newMessage)
 
     setValue("")
   }
