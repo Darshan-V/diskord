@@ -5,5 +5,9 @@ export type useAppDispatch = typeof store.dispatch
 export type useAppSelector = typeof store.getState
 
 export const store: Store<any> = configureStore({
-  reducer: diskordReduser
+  reducer: diskordReduser,
+  middleware: getDefaultMiddleware =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  })
 })

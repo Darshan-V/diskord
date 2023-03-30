@@ -1,5 +1,4 @@
 import React from "react"
-import { io } from "socket.io-client"
 import {
   Accordion,
   AccordionItem,
@@ -14,7 +13,7 @@ import { useAppDispatch } from "../../store/store"
 import diskData from "../../diskData.json"
 import { setSelectedChannel } from "../../store/features/diskord/diskordSlice"
 
-const socket = io("http://localhost:3000")
+// const socket = io("http://localhost:3000")
 
 const TextChannels = () => {
   const dispatch: useAppDispatch = useDispatch()
@@ -24,6 +23,8 @@ const TextChannels = () => {
   }
 
   const diskordState = useSelector((state: dState) => state)
+
+  const socket = useSelector((state: any) => state.socket)
 
   const serverId: string = diskordState.activeServer
   const serverGroup = diskData.find(

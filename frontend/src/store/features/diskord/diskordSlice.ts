@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { io, Socket } from "socket.io-client"
 
 export interface DiskordState {
   activeServer: string
   activeChannel: string
+  socket : Socket
 }
 
 const initialState: DiskordState = {
   activeServer: "",
-  activeChannel: ""
+  activeChannel: "",
+  socket:io('http://localhost:3000')
+ 
 }
 
 const diskordSlice = createSlice({
@@ -19,7 +23,8 @@ const diskordSlice = createSlice({
     },
     setSelectedChannel: (state, action) => {
       state.activeChannel = action.payload
-    }
+    },
+   
   }
 })
 
