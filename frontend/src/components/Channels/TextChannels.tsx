@@ -57,17 +57,33 @@ const TextChannels = () => {
         <AccordionPanel pb={4}>
           <div>
             {channelsList?.map((channel, i) => (
-              <div
-                key={i}
-                className="flex w-full h-10 hover:bg-[#494a4d] hover:cursor-pointer hover:rounded-lg"
-                onClick={() =>
-                  handleClickChannel(channel?.id)
-                }
-              >
-                <span className="my-auto p-2 text-md text-[#919395] hover:text-white hover:cursor-pointer">
-                  {"# "}
-                  {channel?.name}
-                </span>
+              <div key={i}>
+                {channel?.id ===
+                Number(diskordState.activeChannel) ? (
+                  <div
+                    className="flex w-full h-10 bg-[#494a4d] hover:cursor-pointer rounded-lg"
+                    onClick={() =>
+                      handleClickChannel(channel?.id)
+                    }
+                  >
+                    <span className="my-auto p-2 text-md text-[#919395] hover:text-white hover:cursor-pointer">
+                      {"# "}
+                      {channel?.name}
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    className="flex w-full h-10 hover:bg-[#494a4d] hover:cursor-pointer hover:rounded-lg"
+                    onClick={() =>
+                      handleClickChannel(channel?.id)
+                    }
+                  >
+                    <span className="my-auto p-2 text-md text-[#919395] hover:text-white hover:cursor-pointer">
+                      {"# "}
+                      {channel?.name}
+                    </span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
