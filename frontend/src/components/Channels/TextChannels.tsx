@@ -1,4 +1,5 @@
 import React from "react"
+import { io } from "socket.io-client"
 import {
   Accordion,
   AccordionItem,
@@ -12,6 +13,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { useAppDispatch } from "../../store/store"
 import diskData from "../../diskData.json"
 import { setSelectedChannel } from "../../store/features/diskord/diskordSlice"
+
+const socket = io("http://localhost:3000")
 
 const TextChannels = () => {
   const dispatch: useAppDispatch = useDispatch()
@@ -30,6 +33,8 @@ const TextChannels = () => {
 
   function handleClickChannel(id: number) {
     dispatch(setSelectedChannel(id))
+
+    socket.emit("join-channel", id)
   }
 
   return (

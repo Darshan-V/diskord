@@ -13,6 +13,7 @@ const MessageInput = () => {
 
   const params = useParams()
   const dispatch: useAppDispatch = useDispatch()
+
   useEffect(() => {
     if (params) {
       dispatch(setSelectedServer(params.serverId))
@@ -22,6 +23,10 @@ const MessageInput = () => {
 
     socket.on("connect", () => {
       console.log("socketId", socket.id)
+    })
+
+    socket.on("join-channel", (msg) => {
+      console.log(msg)
     })
   }, [])
 
