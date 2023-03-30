@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Tooltip } from "@chakra-ui/react"
 import { BiHash } from "react-icons/bi"
+import { useSelector } from "react-redux"
 import {
   BsSignpost2,
   BsPinAngleFill,
@@ -8,8 +9,9 @@ import {
   BsPeopleFill,
   BsInboxFill
 } from "react-icons/bs"
-
+import diskData from "../../diskData.json"
 const MessageBoxHeader = () => {
+  const [cnl, setCnl] = useState("")
   const icons = [
     { name: "Threads", icon: BsSignpost2 },
     {
@@ -30,13 +32,37 @@ const MessageBoxHeader = () => {
     }
   ]
 
+  interface dState {
+    activeServer: string
+    activeChannel: string
+  }
+
+  const channelState = useSelector((state: dState) => state)
+  function getChannelById(id: number, servers: any[]): any {
+    for (let server of servers) {
+      for (let channel of server.channels) {
+        if (channel.id === id) {
+          setCnl(channel?.name)
+        }
+      }
+    }
+    return null
+  }
+  useEffect(() => {
+    getChannelById(
+      Number(channelState.activeChannel),
+      diskData
+    )
+  })
+  console.log(cnl)
+
   return (
-    <div className="flex  top-0 pl-3  pr-3 w-full h-12 border-2 border-[#3f4147] border-b-slate-500 justify-between items-center">
+    <div className="flex  top-0 pl-3 pr-3 m-auto w-full h-12 border-2 border-[#3f4147] border-b-slate-500 justify-between items-center">
       <div className="flex w-1/4 h-full items-center">
         <BiHash className="text-gray-500 text-2xl" />
 
         <h2 className="text-gray-400 font-sans font-semibold">
-          &nbsp; &nbsp;general
+          &nbsp; &nbsp;{cnl}
         </h2>
       </div>
       <div className="flex w-1/4 justify-evenly">
