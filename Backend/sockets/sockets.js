@@ -46,6 +46,18 @@ export default {
 
         socket.to(socket.roomId).emit("broadcast-msg", newMsg)
       })
+
+      // leaving channel
+      socket.on("leave-channel", (channelId) => {
+        const leaveMsg = {
+          msg_txt: "left",
+          msg_time: Date.now(),
+          channelId: channelId,
+          log_msg: true
+        }
+        socket.to(channelId).emit("user-left", leaveMsg)
+        socket.leave(channelId)
+      })
     })
   }
   //
