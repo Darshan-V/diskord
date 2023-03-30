@@ -54,7 +54,6 @@ const MessageBoxHeader = () => {
       diskData
     )
   })
-  console.log(cnl)
 
   return (
     <div className="flex  top-0 pl-3 pr-3 m-auto w-full h-12 border-2 border-[#3f4147] border-b-slate-500 justify-between items-center">
