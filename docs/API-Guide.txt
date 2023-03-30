@@ -6,9 +6,19 @@ Backend Server runs on http://localhost:3000
 
                         * GET-WORKSPACE-LIST
 
-GET           /api/workspaces                    getWorkspacesList
+GET /api/workspaces                    getWorkspacesList
 
 - API response example:  [{ 1: "wsp1" }, { 2: "wsp2" }, { 2: "wsp2" }] 
+
+
+
+----------------------------------------------------------------------------------------------------------
+
+                        * GET-WORKSPACE'S CHANNELS
+
+GET /api/workspaces/id
+
+- API response example:  [ {"category": "Discussion", "channels": [{ "channelId": 4, "channelName": "general" } ]},.. ] 
 
 ----------------------------------------------------------------------------------------------------------
                         * ADD-NEW-WORKSPACE
@@ -44,10 +54,11 @@ GET           /api/workspaces/wspId
 - Api response example: {"channelType1": [{roomId, roomName}, {roomId, roomName},.....], "channelType2": [......], .....}
 
 
+-----------------------------------------------------------------------------------------------------------
 
+Backend socket listeners
 
-// sockets
+resourcePath                      action
 
-resourcePath                        action
-
-'join-channel'                      join a channel
+'join-channel'                    join a channel                            For not frontend passes the roomId 
+'new-msg'                         broadcast message             

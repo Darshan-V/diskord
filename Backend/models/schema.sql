@@ -66,14 +66,49 @@ create table diskord.channels(
 
 -- insert inot channels
 insert into diskord.channels(channel_name, channel_category_id, workspace_id, admin_id) values ('general', 1, 1, 1);
+insert into diskord.channels(channel_name, channel_category_id, workspace_id, admin_id) values ('chat', 1, 1, 1);
+insert into diskord.channels(channel_name, workspace_id, admin_id) values ('general', 1, 1);
 insert into diskord.channels(channel_name, channel_category_id, workspace_id, admin_id) values ('general', 2, 1, 1);
 insert into diskord.channels(channel_name, channel_category_id, workspace_id, admin_id) values ('general', 3, 2, 1);
 
 select * from  diskord.channel_category where workspace_id=1;
-select * from diskord.channels where workspace_id=1;
 
-select * from  diskord.channel_category;
-select * from diskord.channels as ch left join diskord.channel_category as cat on ch.channel_category_id = cat.channel_category_id where ch.workspace_id=1;
+select * from diskord.channels where workspace_id=1 and channel_category_id is null;
+select * from diskord.channels where workspace_id=1 and channel_category_id is not null;
+
+
+
+-- select * from diskord.channels as channels 
+-- left join diskord.channel_category as channel_category
+-- on channels.channel_category_id = channel_category.channel_category_id
+-- where channels.workspace_id=1;
+
+select channel_id, channel_name, channel_category_name from diskord.channels as channels 
+left join diskord.channel_category as channel_category
+on channels.channel_category_id = channel_category.channel_category_id
+where channels.workspace_id=1;
+
+--
+
+select channel_id, channel_name, channel_category_name from diskord.channels as channels 
+left join diskord.channel_category as channel_category
+on channels.channel_category_id = channel_category.channel_category_id
+where channels.workspace_id=1 and channels.channel_category_id is not null;
+
+-- select * from (select * from diskord.channel_category where workspace_id=1) as cat
+-- inner join (select * from diskord.channels where workspace_id=1) as ch
+-- on ch.channel_category_id = cat.channel_category_id;
+
+with cte as (
+select channel_id, channel_name, channel_category_name from diskord.channels as channels 
+left join diskord.channel_category as channel_category
+on channels.channel_category_id = channel_category.channel_category_id
+where channels.workspace_id=1
+) select channel_category_name, json_agg(json_build_object('channelId', channel_id, 'channelName', channel_name)) as channel_groups
+  from cte 
+  group by channel_category_name 
+  order by channel_category_name;
+
 
 
 create table diskord.user_work_spaces(
