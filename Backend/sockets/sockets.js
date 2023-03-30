@@ -37,14 +37,15 @@ export default {
 
       // listen for new message and broadcast
       socket.on("new-msg", (msg) => {
+        // console.log(msg)
         const newMsg = {
-          msgTxt: msg.msg_txt,
+          msgTxt: msg.msgTxt,
           msgTime: Date.now(),
-          channelId: channelId.roomId,
+          channelId: msg.channelId,
           roomMsg: false
         }
 
-        socket.to(socket.roomId).emit("broadcast-msg", newMsg)
+        socket.to(msg.channelId).emit("broadcast-msg", newMsg)
       })
 
       // leaving channel
