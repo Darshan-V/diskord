@@ -1,50 +1,24 @@
 import { createServer } from "http"
 import express from "express"
 import cors from "cors"
+import config from "./config.js"
 import sockets from "./sockets/sockets.js"
 import { router as workSpaceRouter } from "./routes/workSpaces.js"
 
 const app = express()
-app.use(cors({ origin: ["http://localhost:3001", "http://localhost:5173"] }))
+const port = config.port
+
+app.use(cors({ origin: JSON.parse(config.ORIGIN) }))
 app.use(express.json())
 
 app.use("/api/workspaces", workSpaceRouter)
 
 const httpServer = createServer(app)
 sockets.init(httpServer)
+sockets.listen()
 
-const io = sockets.get()
-
-io.on("connection", (socket) => {
-  console.log("socket connected:", socket.id)
-
-  socket.on("join-channel", (channelId) => {
-    socket.join(channelId)
-    socket.channelId = channelId
-
-    const msg = {
-      msgTxt: "user joined",
-      msgTime: Date.now(),
-      channelId: channelId,
-      logMsg: true
-    }
-    socket.to(channelId).emit("join-channel", msg)
-  })
-
-  socket.on("new-msg", (msg) => {
-    const newMsg = {
-      msgTxt: msg.msg_txt,
-      msgTime: Date.now(),
-      channelId: channelId.roomId,
-      roomMsg: false
-    }
-
-    socket.to(socket.roomId).emit("broadcast-msg", newMsg)
-  })
-})
-
-httpServer.listen(3000, () => {
-  console.log("listening on localhost:3000")
+httpServer.listen(port, () => {
+  console.log("listening on localhost:", port)
 })
 
 // import express from "express"
