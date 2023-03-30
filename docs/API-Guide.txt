@@ -8,7 +8,7 @@ Backend Server runs on http://localhost:3000
 
 GET           /api/workspaces                    getWorkspacesList
 
-- API response example: {  workspaces: [{ 1: "wsp1" }, { 2: "wsp2" }, { 2: "wsp2" }] }
+- API response example:  [{ 1: "wsp1" }, { 2: "wsp2" }, { 2: "wsp2" }] 
 
 ----------------------------------------------------------------------------------------------------------
                         * ADD-NEW-WORKSPACE
