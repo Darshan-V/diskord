@@ -10,6 +10,16 @@ GET           /api/workspaces                    getWorkspacesList
 
 - API response example:  [{ 1: "wsp1" }, { 2: "wsp2" }, { 2: "wsp2" }] 
 
+
+
+----------------------------------------------------------------------------------------------------------
+
+                        * GET-WORKSPACE'S CHANNELS
+
+GET          /api/workspaces/id
+
+- API response example:  [ {"category": "Discussion", "channels": [{ "channelId": 4, "channelName": "general" } ]},.. ] 
+
 ----------------------------------------------------------------------------------------------------------
                         * ADD-NEW-WORKSPACE
 
