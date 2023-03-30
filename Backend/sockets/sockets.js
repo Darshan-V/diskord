@@ -42,7 +42,7 @@ export default {
           msgTxt: msg.msgTxt,
           msgTime: Date.now(),
           channelId: msg.channelId,
-          roomMsg: false
+          log_msg: false
         }
 
         socket.to(msg.channelId).emit("broadcast-msg", newMsg)
