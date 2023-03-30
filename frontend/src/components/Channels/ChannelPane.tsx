@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
   Menu,
   MenuButton,
@@ -8,11 +8,21 @@ import {
 } from "@chakra-ui/react"
 import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
-import diskData from "./../../diskData.json"
 
+import { getAllServers } from "../../../api/diskordApi"
 import TextChannels from "./TextChannels"
 
 const ChannelPane = () => {
+  const [servers, setServers] = useState<any[]>([])
+
+  const getServers = async () => {
+    const serversList = await getAllServers()
+    setServers(serversList)
+  }
+
+  useEffect(() => {
+    getServers()
+  }, [])
   interface dState {
     activeServer: string
     activeChannel: string
@@ -21,8 +31,8 @@ const ChannelPane = () => {
   const diskordState = useSelector((state: dState) => state)
 
   const serverId = diskordState.activeServer
-  const serverGroup = diskData.find(
-    (item) => item.id === Number(serverId)
+  const serverGroup = servers.find(
+    (item) => item.workspace_id === Number(serverId)
   )
 
   return (
@@ -34,7 +44,7 @@ const ChannelPane = () => {
               textColor="white"
               fontWeight="bold"
               fontFamily="sans-serif"
-            >{`${serverGroup?.serverName.toUpperCase()}'s Server`}</MenuButton>
+            >{`${serverGroup?.workspace_name.toUpperCase()}'s Server`}</MenuButton>
             <BsChevronDown className="ml-auto" />
           </div>
           <MenuList>

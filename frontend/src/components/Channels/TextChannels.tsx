@@ -7,11 +7,14 @@ import {
   AccordionIcon,
   Box
 } from "@chakra-ui/react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
+import { useAppDispatch } from "../../store/store"
 import diskData from "../../diskData.json"
+import { setSelectedChannel } from "../../store/features/diskord/diskordSlice"
 
 const TextChannels = () => {
+  const dispatch: useAppDispatch = useDispatch()
   interface dState {
     activeServer: string
     activeChannel: string
@@ -24,6 +27,10 @@ const TextChannels = () => {
     (item) => item.id === Number(serverId)
   )
   const channelsList = serverGroup?.channels
+
+  function handleClickChannel(id: number) {
+    dispatch(setSelectedChannel(id))
+  }
 
   return (
     <Accordion
@@ -53,10 +60,13 @@ const TextChannels = () => {
               <div
                 key={i}
                 className="flex w-full h-10 hover:bg-[#494a4d] hover:cursor-pointer hover:rounded-lg"
+                onClick={() =>
+                  handleClickChannel(channel?.id)
+                }
               >
                 <span className="my-auto p-2 text-md text-[#919395] hover:text-white hover:cursor-pointer">
                   {"# "}
-                  {channel}
+                  {channel?.name}
                 </span>
               </div>
             ))}

@@ -2,26 +2,46 @@
   {
     "id": 1,
     "serverName": "one",
-    "channels": ["general", "random", "javascript"]
+    "channels": [
+      { "id": 1, "name": "general" },
+      { "id": 2, "name": "random" },
+      { "id": 3, "name": "javascript" }
+    ]
   },
   {
     "id": 2,
     "serverName": "two",
-    "channels": ["two-general", "random", "javascript"]
+    "channels": [
+      { "id": 4, "name": "general" },
+      { "id": 5, "name": "random" },
+      { "id": 6, "name": "javascript" }
+    ]
   },
   {
     "id": 3,
     "serverName": "three",
-    "channels": ["three-general", "random", "javascript"]
+    "channels": [
+      { "id": 7, "name": "general" },
+      { "id": 8, "name": "random" },
+      { "id": 9, "name": "javascript" }
+    ]
   },
   {
     "id": 4,
     "serverName": "four",
-    "channels": ["four-general", "random", "javascript"]
+    "channels": [
+      { "id": 10, "name": "general" },
+      { "id": 11, "name": "random" },
+      { "id": 12, "name": "javascript" }
+    ]
   },
   {
     "id": 5,
     "serverName": "five",
-    "channels": ["five-general", "random", "javascript"]
+    "channels": [
+      { "id": 13, "name": "general" },
+      { "id": 14, "name": "random" },
+      { "id": 15, "name": "javascript" }
+    ]
   }
 ]

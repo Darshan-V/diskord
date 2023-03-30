@@ -18,7 +18,7 @@ const diskordSlice = createSlice({
       state.activeServer = action.payload
     },
     setSelectedChannel: (state, action) => {
-      state.activeChannel = action.payload.selectedChannel
+      state.activeChannel = action.payload
     }
   }
 })

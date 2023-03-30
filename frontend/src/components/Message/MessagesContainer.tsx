@@ -7,7 +7,7 @@ const MessagesContainer = () => {
   return (
     <div className="flex flex-col w-full h-screen  bg-[#252526]">
       <MessageBoxHeader />
-      <MessageBox/>
+      <MessageBox />
       <MessageInput />
     </div>
   )

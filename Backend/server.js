@@ -9,6 +9,7 @@ const app = express()
 const port = config.port
 
 app.use(cors({ origin: JSON.parse(config.ORIGIN) }))
+
 app.use(express.json())
 
 app.use("/api/workspaces", workSpaceRouter)
