@@ -51,12 +51,23 @@ export default {
       // leaving channel
       socket.on("leave-channel", (channelId) => {
         const leaveMsg = {
-          msg_txt: "left",
-          msg_time: Date.now(),
+          msgTxt: "user left",
+          msgTime: Date.now(),
           channelId: channelId,
-          log_msg: true
+          logMsg: true
         }
         socket.to(channelId).emit("user-left", leaveMsg)
+        socket.leave(channelId)
+      })
+
+      socket.on("disconnect", (channelId) => {
+        const disconnectMsg = {
+          msgTxt: "user disconnected",
+          msgTime: Date.now(),
+          channelId: channelId,
+          logMsg: true
+        }
+        socket.to(channelId).emit("user-disconnected", disconnectMsg)
         socket.leave(channelId)
       })
     })
