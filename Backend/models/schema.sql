@@ -8,7 +8,7 @@ create table diskord.users (
     phone                   varchar,
     email                   varchar -- ideally not null
 );
-
+ 
 -- insert 2 users
 insert into diskord.users(user_name, password) values ('user1', 'password1');
 insert into diskord.users(user_name, password) values ('user2', 'password2');
