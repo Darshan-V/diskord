@@ -11,21 +11,23 @@ const pool = new Pool({
 })
 
 export async function getWorkSpaces() {
-  const res = await pool.query("select workspace_id, workspace_name from diskord.workspaces;")
+  const res = await pool.query(
+    `select id as "workSpaceId", name "workSpaceName"  from diskord.workspaces;`
+  )
   return res.rows
 }
 
 export async function getWorkspaceChannels(workspaceId) {
   const res = await pool.query(
     `with cte as (
-        select channel_id, channel_name, channel_category_name from diskord.channels as channels 
-        left join diskord.channel_category as channel_category
-        on channels.channel_category_id = channel_category.channel_category_id
-        where channels.workspace_id=$1
-        ) select channel_category_name as category, json_agg(json_build_object('channelId', channel_id, 'channelName', channel_name)) as channels
-          from cte 
-          group by channel_category_name 
-          order by channel_category_name desc;`,
+    select channels.id, channels.name as channel, channel_category.name as category from diskord.channels as channels 
+    left join diskord.channel_category as channel_category
+    on channels.category_id = channel_category.id
+    where channels.workspace_id=$1
+    ) select  category, json_agg(json_build_object('channelId', id, 'channelName', channel)) as channels
+      from cte 
+      group by category
+      order by category desc`,
     [workspaceId]
   )
 
