@@ -39,11 +39,12 @@ const MessageBoxHeader = () => {
   }
 
   const channelState = useSelector((state: dState) => state)
+
   function getChannelById(id: number, servers: any[]): any {
     for (let server of servers) {
       for (let channel of server.channels) {
         if (channel.id === id) {
-          setCnl(channel?.name)
+          setCnl(channel.name)
         }
       }
     }

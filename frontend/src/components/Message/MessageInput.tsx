@@ -7,7 +7,7 @@ import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
 
 // const socket = io("http://localhost:3000")
 
-const MessageInput = () => {
+const MessageInput = (props: { setMessages: any }) => {
   const [value, setValue] = useState("")
 
   const params = useParams()
@@ -19,6 +19,13 @@ const MessageInput = () => {
   }
   const diskordState = useSelector((state: dState) => state)
   const socket = useSelector((state: any) => state.socket)
+  interface bMsg {
+    self: boolean
+    msgTxt: string
+    msgTime: string
+    channelId: number
+    logMsg: boolean
+  }
 
   useEffect(() => {
     if (params) {
@@ -32,6 +39,13 @@ const MessageInput = () => {
     socket.on("join-channel", (msg: any) => {
       console.log(msg)
     })
+
+    socket.on("broadcast-msg", (msg: bMsg) => {
+      msg.self = false
+      props.setMessages((currentMsgs: any) => {
+        return [...currentMsgs, msg]
+      })
+    })
   }, [])
 
   const handleInputChange = (
@@ -40,14 +54,10 @@ const MessageInput = () => {
     setValue(event.target.value)
   }
 
-  interface newMsg {
-    msgTxt: string
-    channelId: number
-  }
-
-  let newMessage: newMsg = {
+  const newMessage = {
     msgTxt: value,
-    channelId: Number(diskordState.activeChannel)
+    channelId: Number(diskordState.activeChannel),
+    self: true
   }
 
   const handleSubmit = (
@@ -56,6 +66,9 @@ const MessageInput = () => {
     event.preventDefault()
     // console.log(value)
     socket.emit("new-msg", newMessage)
+    props.setMessages((currentMessages: []) => {
+      return [...currentMessages, newMessage]
+    })
 
     setValue("")
   }
@@ -68,10 +81,13 @@ const MessageInput = () => {
         paddingRight="3rem"
       >
         <div className="flex w-full bg-[#4e4e50] rounded-lg pl-3 pr-3 h-10">
-          <form onSubmit={handleSubmit} className="flex">
+          <form
+            onSubmit={handleSubmit}
+            className="flex w-full"
+          >
             <Input
               variant="unstyled"
-              size="lg"
+              size="xl"
               textColor="white"
               placeholder={`message #channelName`}
               value={value}

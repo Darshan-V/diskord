@@ -8,6 +8,7 @@ import {
   Box
 } from "@chakra-ui/react"
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 import { useAppDispatch } from "../../store/store"
 import diskData from "../../diskData.json"
@@ -17,6 +18,7 @@ import { setSelectedChannel } from "../../store/features/diskord/diskordSlice"
 
 const TextChannels = () => {
   const dispatch: useAppDispatch = useDispatch()
+  const navigate = useNavigate()
   interface dState {
     activeServer: string
     activeChannel: string
@@ -34,8 +36,8 @@ const TextChannels = () => {
 
   function handleClickChannel(id: number) {
     dispatch(setSelectedChannel(id))
-
     socket.emit("join-channel", id)
+    navigate(`/diskord/servers/${serverId}/channels/${id}`)
   }
 
   return (
