@@ -3,8 +3,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  Button
+  MenuItem
 } from "@chakra-ui/react"
 import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
