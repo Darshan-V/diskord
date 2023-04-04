@@ -8,7 +8,25 @@ Backend Server runs on http://localhost:3000
 
 GET /api/workspaces                    getWorkspacesList
 
-- API response example:  [{ 1: "wsp1" }, { 2: "wsp2" }, { 2: "wsp2" }] 
+- API response example: 
+[
+	{
+		"workSpaceId": 1,
+		"workSpaceName": "wsp1"
+	},
+	{
+		"workSpaceId": 2,
+		"workSpaceName": "wsp2"
+	},
+	{
+		"workSpaceId": 3,
+		"workSpaceName": "wsp3"
+	},
+	{
+		"workSpaceId": 4,
+		"workSpaceName": "wsp4"
+	}
+]
 
 
 
@@ -16,9 +34,42 @@ GET /api/workspaces                    getWorkspacesList
 
                         * GET-WORKSPACE'S CHANNELS
 
-GET /api/workspaces/id
+GET /api/workspaces/:id/channels
 
-- API response example:  [ {"category": "Discussion", "channels": [{ "channelId": 4, "channelName": "general" } ]},.. ] 
+- API response example: 
+[
+	{
+		"category": null,
+		"channels": [
+			{
+				"channelId": 3,
+				"channelName": "general"
+			}
+		]
+	},
+	{
+		"category": "Text channels",
+		"channels": [
+			{
+				"channelId": 1,
+				"channelName": "general"
+			},
+			{
+				"channelId": 2,
+				"channelName": "chat"
+			}
+		]
+	},
+	{
+		"category": "Discussion",
+		"channels": [
+			{
+				"channelId": 4,
+				"channelName": "general"
+			}
+		]
+	}
+]
 
 ----------------------------------------------------------------------------------------------------------
                         * ADD-NEW-WORKSPACE
