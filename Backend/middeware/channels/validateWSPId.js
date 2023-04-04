@@ -1,17 +1,12 @@
-import { getWorkspaceChannels } from "../models/channels.js"
-
-export async function getChannels(req, res) {
+export async function validateWSPId(req, res, next) {
   try {
     const wspId = req.params.id
     if (!Number.isInteger(Number(wspId))) {
       return res.status(400).json({ err: "workspace id should be an integer" })
     }
-
-    const channels = await getWorkspaceChannels(wspId)
-
-    res.json(channels)
+    next()
   } catch (err) {
     console.log(err)
-    res.sendStatus(500)
+    return res.sendStatus(500)
   }
 }

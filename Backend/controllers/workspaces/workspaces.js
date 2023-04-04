@@ -1,4 +1,4 @@
-import { getWorkSpaces } from "../models/workspaces.js"
+import { getWorkSpaces } from "../../models/workspaces.js"
 
 export async function getWorkSpaceList(req, res) {
   try {
