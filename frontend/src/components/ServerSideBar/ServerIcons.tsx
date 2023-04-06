@@ -54,24 +54,24 @@ const ServerIcons = () => {
             key={i}
             className="flex w-20 h-20 hover:cursor-pointer"
             onClick={() => {
-              handleClickServer(space.workspace_id)
+              handleClickServer(space.workSpaceId)
             }}
             onContextMenu={(e) => {
               e.preventDefault()
               console.log("right click")
             }}
           >
-            {space.workspace_id === activeServer ? (
+            {space.workSpaceId === activeServer ? (
               <div className="w-1 h-14 bg-white my-auto rounded-tr-xl rounded-br-xl"></div>
             ) : null}
             {/* <div className="w-1 h-2 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
             <Tooltip
-              label={space.workspace_name}
+              label={space.workSpaceName}
               placement="right"
               hasArrow={true}
             >
               <Avatar
-                name={space.workspace_name}
+                name={space.workSpaceName}
                 bg="gray.500"
                 className="flex m-auto w-14 h-14 bg-slate-700 rounded-2xl shadow-xl "
               >
