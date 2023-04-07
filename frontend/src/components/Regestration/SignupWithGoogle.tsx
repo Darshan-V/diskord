@@ -1,15 +1,19 @@
 import axios from "axios"
 import React from "react"
+import { useDispatch } from "react-redux"
 import { FcGoogle } from "react-icons/fc"
+import { setLoggedInStatus } from "../../store/features/diskord/diskordSlice"
 
 const SignupWithGoogle = () => {
+  const dispatch = useDispatch()
   const handleClickRegister = async () => {
     const baseUrl = "http://localhost:3000"
     const response = await axios.get(`${baseUrl}/api/users`)
     console.log(response)
     const url = await response.data
     console.log(url)
-    window.location.href = url.url
+    dispatch(setLoggedInStatus(true))
+    window.location.href = url.redirectUrl
   }
   return (
     <div

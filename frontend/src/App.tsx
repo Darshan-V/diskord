@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route
-          path="/diskord/servers/:serverId/channels?/:channelId?"
+          path="/diskord/servers/:serverId?/channels?/:channelId?"
           element={<MessagesContainer />}
         />
       </Routes>
