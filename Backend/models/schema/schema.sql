@@ -11,7 +11,7 @@ create table diskord.users (
 );
 
 -- insert 2 users
-insert into diskord.users(gmail_name,  email) values ('vishwanath', 'reddy4ds2018@gmail.com');
+insert into diskord.users(gmail_name,  email) values ('name1', 'name@gmail.com');
 insert into diskord.users(gmail_name,  email) values ('name2', 'name2@gmail.com');
 select * from diskord.users;
 
