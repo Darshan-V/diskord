@@ -62,7 +62,7 @@ export async function registrationCallBack(req, res) {
       .redirect(config.CLIENT_URL)
   } catch (err) {
     if (err.message === "email already registered") {
-      return res.status(409).json("email already registered, please login")
+      return res.status(409).redirect(`${config.CLIENT_URL}/diskord/servers`)
     }
     console.log(err)
     return res.status(500).json()
