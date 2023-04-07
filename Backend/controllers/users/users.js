@@ -12,7 +12,7 @@ export async function registerUserThroughGoogle(req, res) {
     scope: "openid profile email"
   })
 
-  return res.json({ url: `${config.AUTH_ENDPOINT}?${queryParams}` })
+  return res.json({ redirectUrl: `${config.AUTH_ENDPOINT}?${queryParams}` })
 }
 
 export async function registrationCallBack(req, res) {
@@ -56,7 +56,7 @@ export async function registrationCallBack(req, res) {
       .redirect(config.CLIENT_URL)
   } catch (err) {
     if (err.message === "email already registered") {
-      return res.status(400).json("email already registered, please login")
+      return res.status(409).json("email already registered, please login")
     }
     return res.status(500).json()
   }
