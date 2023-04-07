@@ -2,19 +2,25 @@ DROP SCHEMA IF EXISTS diskord CASCADE;
 create schema diskord;
 
 create table diskord.users (
-    id                 serial primary key,
-    first_name         varchar  not null,
-    last_name          varchar  not null,
-    password           varchar not null,
-    phone              varchar,
-    email              varchar not null unique
+	id                 serial primary key,
+    gmail_name         varchar,
+	user_choosen_name  varchar,
+    email              varchar unique,
+    phone              varchar unique,
+	password		   varchar
 );
 
 -- insert 2 users
-insert into diskord.users(first_name, last_name, password, email) values ('first_name1', 'last_name1', 'password1', 'first_name1@gmail.com');
-insert into diskord.users(first_name, last_name, password, email) values ('first_name2', 'last_name2', 'password2', 'first_name2@gmail.com');
+insert into diskord.users(gmail_name,  email) values ('vishwanath', 'reddy4ds2018@gmail.com');
+insert into diskord.users(gmail_name,  email) values ('name2', 'name2@gmail.com');
 select * from diskord.users;
 
+create table diskord.sessions(
+    session_id         varchar,
+	user_id   		   integer not null,
+    created_at         timestamp default now(),
+    constraint fk_users_sessions foreign key(user_id) references diskord.users(id)
+);
 
 create table diskord.workspaces(
     id                      serial primary key,
@@ -80,15 +86,15 @@ select * from diskord.channels where workspace_id=1 and category_id is null;
 select * from diskord.channels where workspace_id=1 and category_id is not null;
 
 
-with cte as (
-        select channels.id, channels.name as channel, channel_category.name as category from diskord.channels as channels 
-        left join diskord.channel_category as channel_category
-        on channels.category_id = channel_category.id
-        where channels.workspace_id=1
-        ) select  category, json_agg(json_build_object('channelId', id, 'channelName', channel)) as channels
-          from cte 
-          group by category
-          order by category desc;
+-- with cte as (
+--         select channels.id, channels.name as channel, channel_category.name as category from diskord.channels as channels 
+--         left join diskord.channel_category as channel_category
+--         on channels.category_id = channel_category.id
+--         where channels.workspace_id=1
+--         ) select  category, json_agg(json_build_object('channelId', id, 'channelName', channel)) as channels
+--           from cte 
+--           group by category
+--           order by category desc;
 		  
 		  
 

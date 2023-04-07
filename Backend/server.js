@@ -5,15 +5,19 @@ import config from "./config.js"
 import sockets from "./sockets/sockets.js"
 import { router as workSpaceRouter } from "./routes/workSpaces.js"
 import { router as channelRouter } from "./routes/channels.js"
+import { router as sessionsRouter } from "./routes/sessions.js"
+import { router as usersRouter } from "./routes/users.js"
 
 const app = express()
 const port = config.port
 
-app.use(cors({ origin: JSON.parse(config.ORIGIN) }))
+app.use(cors({ origin: JSON.parse(config.ORIGIN), credentials: true }))
 app.use(express.json())
 
 app.use("/api/workspaces", workSpaceRouter)
 app.use("/api/workspaces/:id/channels", channelRouter)
+app.use("/api/users", usersRouter)
+app.use("/api/sessions", sessionsRouter)
 
 const httpServer = createServer(app)
 sockets.init(httpServer)
