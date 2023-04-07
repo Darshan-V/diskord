@@ -2,17 +2,22 @@ import querystring from "querystring"
 import config from "../../config.js"
 import fetch from "node-fetch"
 import { v4 as uuid } from "uuid"
-import { addUser } from "../../models/users.js"
+import { addUser, createSession } from "../../models/users.js"
 
 export async function registerUserThroughGoogle(req, res) {
-  const queryParams = querystring.stringify({
-    response_type: "code",
-    client_id: config.CLIENT_ID,
-    redirect_uri: config.REGISTRATION_CALLBACK,
-    scope: "openid profile email"
-  })
+  try {
+    const queryParams = querystring.stringify({
+      response_type: "code",
+      client_id: config.CLIENT_ID,
+      redirect_uri: config.REGISTRATION_CALLBACK,
+      scope: "openid profile email"
+    })
 
-  return res.json({ redirectUrl: `${config.AUTH_ENDPOINT}?${queryParams}` })
+    return res.json({ redirectUrl: `${config.AUTH_ENDPOINT}?${queryParams}` })
+  } catch (err) {
+    console.log(err)
+    return res.sendStatus(500)
+  }
 }
 
 export async function registrationCallBack(req, res) {
@@ -49,7 +54,8 @@ export async function registrationCallBack(req, res) {
 
     const sessionId = uuid()
 
-    //   await createSession(sessionId, email)
+    await createSession(sessionId, email)
+
     res
       .cookie("sessionId", sessionId, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
       .status(201)
@@ -58,6 +64,7 @@ export async function registrationCallBack(req, res) {
     if (err.message === "email already registered") {
       return res.status(409).json("email already registered, please login")
     }
+    console.log(err)
     return res.status(500).json()
   }
 }
