@@ -24,9 +24,22 @@ export async function addUser(name, email) {
   }
 }
 
-// export async function test() {
-//   const res = await pool.query(`select * from diskord.users`)
+export async function createSession(sessionId, email) {
+  let res = await pool.query(`select id from diskord.users where email = $1`, [email])
+  const userId = res.rows[0].id
+
+  await pool.query(
+    `insert into diskord.sessions(session_id, user_id)
+         values ($1, $2);`,
+    [sessionId, userId]
+  )
+}
+
+// async function test() {
+//   let res = await pool.query(`select * from diskord.sessions`)
+//   const id = res.rows[0].user_id
+//   console.log(res.rows)
+//   res = await pool.query(`select * from diskord.users where id = ${id}`)
 //   console.log(res.rows)
 // }
-
-// // test()
+// test()
