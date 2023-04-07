@@ -31,7 +31,7 @@ const ChannelPane = () => {
 
   const serverId = diskordState.activeServer
   const serverGroup = servers.find(
-    (item) => item.workspace_id === Number(serverId)
+    (item) => item.workSpaceId === Number(serverId)
   )
 
   return (
@@ -43,7 +43,7 @@ const ChannelPane = () => {
               textColor="white"
               fontWeight="bold"
               fontFamily="sans-serif"
-            >{`${serverGroup?.workspace_name.toUpperCase()}'s Server`}</MenuButton>
+            >{`${serverGroup?.workSpaceName.toUpperCase()}'s Server`}</MenuButton>
             <BsChevronDown className="ml-auto" />
           </div>
           <MenuList>
