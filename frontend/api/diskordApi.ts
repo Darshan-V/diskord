@@ -8,7 +8,20 @@ const getAllServers = async () => {
       `${baseUrl}/api/workspaces`
     )
     return response.data
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-export { getAllServers }
+const getChannelByServer = async (serverId: string) => {
+  try {
+    const response = await axios.get(
+      `${baseUrl}/api/workspaces/${serverId}/channels`
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { getAllServers, getChannelByServer }
