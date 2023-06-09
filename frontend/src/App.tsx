@@ -1,11 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import { Routes, Route } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import LeftNavbar from "./components/LeftNavbar/LeftNavbar"
 import MessagesContainer from "./components/Message/MessagesContainer"
 import Signup from "./components/Regestration/Signup"
 
 function App() {
+  const location = useLocation()
   interface dState {
     isLoggedIn: boolean
   }
@@ -16,7 +18,7 @@ function App() {
 
   return (
     <div className="flex w-screen h-screen bg-[#28292d]">
-      <>{isLoggedIn ? <LeftNavbar /> : ""}</>
+      {location.pathname !== "/" ? <LeftNavbar /> : ""}
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route

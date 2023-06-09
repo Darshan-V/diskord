@@ -5,7 +5,7 @@ import { Card, CardBody, Avatar } from "@chakra-ui/react"
 const MessageCard = (props: {
   messages: any
 }): JSX.Element => {
-  console.log(props.messages)
+  // console.log(props.messages)
 
   interface dState {
     activeServer: string

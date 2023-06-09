@@ -10,6 +10,7 @@ import { useSelector } from "react-redux"
 
 import { getAllServers } from "../../../api/diskordApi"
 import TextChannels from "./TextChannels"
+import { useGetWorkSpacesQuery } from "../../store/services/diskordServices"
 
 const ChannelPane = () => {
   const [servers, setServers] = useState<any[]>([])
@@ -33,6 +34,8 @@ const ChannelPane = () => {
   const serverGroup = servers.find(
     (item) => item.workSpaceId === Number(serverId)
   )
+  const { data } = useGetWorkSpacesQuery()
+  console.log(data)
 
   return (
     <div className="flex flex-col w-60 h-full bg-[#3f4147] ">
@@ -43,7 +46,11 @@ const ChannelPane = () => {
               textColor="white"
               fontWeight="bold"
               fontFamily="sans-serif"
-            >{`${serverGroup?.workSpaceName.toUpperCase()}'s Server`}</MenuButton>
+            >{`${
+              serverGroup?.workSpaceName !== undefined
+                ? serverGroup.workSpaceName.toUpperCase()
+                : ""
+            }'s Server`}</MenuButton>
             <BsChevronDown className="ml-auto" />
           </div>
           <MenuList>
