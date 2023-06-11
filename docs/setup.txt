@@ -1,0 +1,10 @@
+
+Backend Setup:
+
+1. npm install   (install modules from package.json)
+2. npm start     (run backend server)
+
+
+For Frontend:
+
+// add your setup instructions here

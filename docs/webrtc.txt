@@ -1,0 +1,38 @@
+1) Set up signaling: Both peers need to connect to a signaling server (e.g. using Socket.io) to exchange session description information and ICE candidates. The signaling server is only used to exchange metadata, and doesn't handle the actual media stream.
+
+2) Create peer connection: Each peer needs to create a new instance of RTCPeerConnection to manage the connection.
+
+3) Add media stream: Each peer needs to get access to the user's media streams (e.g. using getUserMedia) and add them to the peer connection.
+
+4) Create data channel: Each peer can create a data channel to exchange any arbitrary data (e.g. chat messages).
+
+5) Exchange session description: Once the signaling is established, both peers can create and exchange session description information (i.e. offer and answer). The session description includes information about the media stream, codec, and other connection settings.
+
+6) Exchange ICE candidates: Each peer will generate ICE candidates, which represent network address information about the peer's connection, and send them to the other peer over the signaling server.
+
+7) Set remote description: Once a peer receives a session description from the other peer, it needs to set it as the remote description of the RTCPeerConnection.
+
+8) Add ICE candidates: Each peer needs to add the ICE candidates received from the other peer to their own RTCPeerConnection.
+
+9) Establish the connection: Once both peers have exchanged session description and ICE candidates, the RTCPeerConnection will use the information to establish a peer-to-peer connection.
+
+10) Start communication: Once the connection is established, each peer can start sending media streams and data over the connection.
+
+
+
+* peerConnection.createOffer()
+
+1. It is a method used in WebRTC (Web Real-Time Communication) technology to initiate a connection between two devices 
+   (known as peers) that want to communicate through a video, audio, or data stream.
+
+2. When a user wants to establish a connection with another user, they first create a peerConnection object, 
+   which represents the connection between the two peers. Once the peerConnection object is created, the user can
+   call the createOffer() method on it to generate an SDP (Session Description Protocol) offer.
+
+3. The SDP offer contains information about the user's capabilities and preferences for the type of communication 
+   they want to establish, such as the type of media (audio or video), the preferred encoding format, and the desired 
+   bandwidth. The SDP offer is then sent to the other peer, who can review the offer and either accept it or modify it
+   by creating an SDP answer using the createAnswer() method.
+
+4. By exchanging SDP offers and answers, the two peers negotiate the terms of the connection and establish a session 
+   that can be used for real-time communication.

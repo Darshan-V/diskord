@@ -1,3 +1,18 @@
+.env
+node_modules
+testFrontEnd
+testfrontend
+schema.js
+
+
+
+testfrontend
+webrtc-for-the-curious.pdf
+examples
+testclient
+schema.js
+
+
 # Logs
 logs
 *.log

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "serverName": "one",
+    "channels": [
+      { "id": 1, "name": "onegeneral" },
+      { "id": 2, "name": "onerandom" },
+      { "id": 3, "name": "onejavascript" }
+    ]
+  },
+  {
+    "id": 2,
+    "serverName": "two",
+    "channels": [
+      { "id": 4, "name": "twogeneral" },
+      { "id": 5, "name": "tworandom" },
+      { "id": 6, "name": "twojavascript" }
+    ]
+  },
+  {
+    "id": 3,
+    "serverName": "three",
+    "channels": [
+      { "id": 7, "name": "threegeneral" },
+      { "id": 8, "name": "threerandom" },
+      { "id": 9, "name": "threejavascript" }
+    ]
+  },
+  {
+    "id": 4,
+    "serverName": "four",
+    "channels": [
+      { "id": 10, "name": "fouegeneral" },
+      { "id": 11, "name": "fourrandom" },
+      { "id": 12, "name": "fourjavascript" }
+    ]
+  },
+  {
+    "id": 5,
+    "serverName": "five",
+    "channels": [
+      { "id": 13, "name": "fivegeneral" },
+      { "id": 14, "name": "fiverandom" },
+      { "id": 15, "name": "fivejavascript" }
+    ]
+  }
+]
