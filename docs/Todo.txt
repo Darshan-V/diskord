@@ -1,0 +1,1 @@
+console.log(functionName(args).toString()) -> can read the function

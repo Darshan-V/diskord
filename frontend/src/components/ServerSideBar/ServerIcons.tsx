@@ -14,12 +14,9 @@ import {
 
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
 import { useAppDispatch } from "../../store/store"
-import { getAllServers } from "./../../../api/diskordApi"
 import CreateServer from "./CreateServer"
 
-const ServerIcons = () => {
-  const [servers, setServers] = useState<any[]>([])
-
+const ServerIcons = ({ data }: any) => {
   const navigate = useNavigate()
   const dispatch: useAppDispatch = useDispatch()
 
@@ -30,59 +27,71 @@ const ServerIcons = () => {
 
   const diskordState = useSelector((state: dState) => state)
   const activeServer = Number(diskordState.activeServer)
+  // console.log(activeServer)
   const activeChannel = Number(diskordState.activeChannel)
 
   function handleClickServer(id: number) {
+    console.log(id)
     dispatch(setSelectedServer(id))
     navigate(`/diskord/servers/${id}`)
   }
 
-  const getServers = async () => {
-    const serversList = await getAllServers()
-    setServers(serversList)
-  }
-
-  useEffect(() => {
-    getServers()
-  }, [])
-
   return (
     <div>
       <ul className="flex flex-col justify-start h-full">
-        {servers.map((space, i) => (
-          <div
-            key={i}
-            className="flex w-20 h-20 hover:cursor-pointer"
-            onClick={() => {
-              handleClickServer(space.workSpaceId)
-            }}
-            onContextMenu={(e) => {
-              e.preventDefault()
-              console.log("right click")
-            }}
-          >
-            {space.workSpaceId === activeServer ? (
-              <div className="w-1 h-14 bg-white my-auto rounded-tr-xl rounded-br-xl"></div>
-            ) : null}
-            {/* <div className="w-1 h-2 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
-            <Tooltip
-              label={space.workSpaceName}
-              placement="right"
-              hasArrow={true}
+        {data.map(
+          (
+            space: {
+              workSpaceId: number
+              workSpaceName:
+                | string
+                | number
+                | boolean
+                | React.ReactElement<
+                    any,
+                    | string
+                    | React.JSXElementConstructor<any>
+                  >
+                | React.ReactFragment
+                | null
+                | undefined
+            },
+            i: React.Key | null | undefined
+          ) => (
+            <div
+              key={i}
+              className="flex w-20 h-20 hover:cursor-pointer"
+              onClick={() => {
+                handleClickServer(space.workSpaceId)
+              }}
+              onContextMenu={(e) => {
+                e.preventDefault()
+                console.log("right click")
+              }}
             >
-              <Avatar
-                name={space.workSpaceName}
-                bg="gray.500"
-                className="flex m-auto w-14 h-14 bg-slate-700 rounded-2xl shadow-xl "
+              {space.workSpaceId === activeServer ? (
+                <div className="w-1 h-14 bg-white my-auto rounded-tr-xl rounded-br-xl"></div>
+              ) : null}
+              {/* <div className="w-1 h-2 bg-white my-auto rounded-tr-xl rounded-br-xl"></div> */}
+              <Tooltip
+                label={space.workSpaceName}
+                placement="right"
+                hasArrow={true}
               >
-                {/* <AvatarBadge
+                <Avatar
+                  name={`${space.workSpaceName}`}
+                  bg="gray.500"
+                  className="flex m-auto w-14 h-14 bg-slate-700 rounded-2xl shadow-xl "
+                >
+                  {/* <AvatarBadge
                   boxSize="1.25rem"
                   bg="red.500"
                 /> */}
-              </Avatar>
-            </Tooltip>
-          </div>
-        ))}
+                </Avatar>
+              </Tooltip>
+            </div>
+          )
+        )}
         <div className="flex w-20 h-20 cursor-pointer">
           <CreateServer />
         </div>

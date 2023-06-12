@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import {
   Menu,
   MenuButton,
@@ -8,34 +8,35 @@ import {
 import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
 
-import { getAllServers } from "../../../api/diskordApi"
 import TextChannels from "./TextChannels"
-import { useGetWorkSpacesQuery } from "../../store/services/diskordServices"
+import { useGetWorkspacesQuery } from "../../store/services/diskordApi"
 
 const ChannelPane = () => {
-  const [servers, setServers] = useState<any[]>([])
+  const {
+    data: servers,
+    error,
+    isLoading
+  } = useGetWorkspacesQuery()
 
-  const getServers = async () => {
-    const serversList = await getAllServers()
-    setServers(serversList)
-  }
-
-  useEffect(() => {
-    getServers()
-  }, [])
   interface dState {
-    activeServer: string
-    activeChannel: string
+    diskord: { activeServer: string; activeChannel: string }
   }
 
-  const diskordState = useSelector((state: dState) => state)
+  const diskordState = useSelector(
+    (state: dState) => state.diskord
+  )
 
   const serverId = diskordState.activeServer
+  console.log(serverId)
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
   const serverGroup = servers.find(
-    (item) => item.workSpaceId === Number(serverId)
+    (item: { workSpaceId: number }) =>
+      item.workSpaceId === Number(serverId)
   )
-  const { data } = useGetWorkSpacesQuery()
-  console.log(data)
+  console.log(serverGroup)
 
   return (
     <div className="flex flex-col w-60 h-full bg-[#3f4147] ">

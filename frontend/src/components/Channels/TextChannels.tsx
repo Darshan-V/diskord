@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { useAppDispatch } from "../../store/store"
-import diskData from "../../diskData.json"
 import { setSelectedChannel } from "../../store/features/diskord/diskordSlice"
 import { getChannelByServer } from "../../../api/diskordApi"
 
@@ -22,20 +21,25 @@ const TextChannels = () => {
   const navigate = useNavigate()
   const [channelsList, setChannelsList] = useState([])
   interface dState {
-    activeServer: string
-    activeChannel: string
+    diskord: {
+      activeServer: string
+      activeChannel: string
+    }
   }
 
-  const diskordState = useSelector((state: dState) => state)
+  const currentState = useSelector(
+    (state: dState) => state.diskord
+  )
 
-  const socket = useSelector((state: any) => state.socket)
+  const serverId = currentState.activeServer
 
-  const serverId: string = diskordState.activeServer
+  const socket = useSelector(
+    (state: any) => state.diskord.socket
+  )
 
   const getChannels = async (sId: string) => {
     const channels = await getChannelByServer(sId)
     setChannelsList(channels)
-    console.log(channels)
   }
 
   useEffect(() => {
