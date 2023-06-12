@@ -6,9 +6,9 @@ export interface DiskordState {
   activeChannel: string
   socket: Socket
   isLoggedIn: boolean
-  workspaces:[]
-  channels:[]
-  messages:{}
+  workspaces: []
+  channels: []
+  messages: {}
 }
 
 const initialState: DiskordState = {
@@ -16,9 +16,9 @@ const initialState: DiskordState = {
   activeChannel: "",
   socket: io("http://localhost:3000"),
   isLoggedIn: false,
-  workspaces:[],
-  channels:[],
-  messages:{}
+  workspaces: [],
+  channels: [],
+  messages: {}
 }
 
 const diskordSlice = createSlice({
@@ -34,13 +34,16 @@ const diskordSlice = createSlice({
     setLoggedInStatus: (state, action) => {
       state.isLoggedIn = action.payload
     },
-    setMessages:(state,action) => {
+    setMessages: (state, action) => {
       state.messages = action.payload
     }
   }
 })
 
-export const { setSelectedServer, setSelectedChannel, setLoggedInStatus } =
-  diskordSlice.actions
+export const {
+  setSelectedServer,
+  setSelectedChannel,
+  setLoggedInStatus
+} = diskordSlice.actions
 
 export default diskordSlice.reducer

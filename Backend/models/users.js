@@ -1,4 +1,4 @@
-import pool from "./utils/setup"
+import pool from "./utils/setup.js"
 
 export async function addUser(name, email) {
   try {
