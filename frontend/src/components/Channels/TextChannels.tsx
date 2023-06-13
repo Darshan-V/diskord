@@ -54,14 +54,24 @@ const TextChannels = () => {
 
   return (
     <Accordion
-      defaultIndex={[1]}
-      allowToggle={true}
+      defaultIndex={[0]}
+      allowMultiple
       className="pt-3"
     >
       {channelsList?.map((channel: any, i) => (
         <AccordionItem borderColor="#3f4147" key={i}>
-          <h2>
-            <AccordionButton border="none">
+          <h2
+            className={`${
+              channel.category ? "block" : "hidden"
+            }`}
+          >
+            <AccordionButton
+              border="none"
+              _expanded={{
+                bg: "#393a3b",
+                color: "white"
+              }}
+            >
               <Box
                 as="span"
                 flex="1"
