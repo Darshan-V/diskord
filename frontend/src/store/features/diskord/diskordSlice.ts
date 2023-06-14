@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { io, Socket } from "socket.io-client"
 
 export interface DiskordState {
   activeServer: string
   activeChannel: string
-  socket: Socket
   isLoggedIn: boolean
   workspaces: []
   channels: []
@@ -14,7 +12,6 @@ export interface DiskordState {
 const initialState: DiskordState = {
   activeServer: "",
   activeChannel: "",
-  socket: io("http://localhost:3000"),
   isLoggedIn: false,
   workspaces: [],
   channels: [],
