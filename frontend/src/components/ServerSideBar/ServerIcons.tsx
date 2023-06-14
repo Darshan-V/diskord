@@ -22,7 +22,6 @@ const ServerIcons = ({ data }: any) => {
 
   const diskordState = useSelector((state: dState) => state)
   const activeServer = Number(diskordState.activeServer)
-  // console.log(activeServer)
   const activeChannel = Number(diskordState.activeChannel)
 
   function handleClickServer(id: number) {
