@@ -4,12 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import {
   Tooltip,
   Avatar,
-  AvatarBadge,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button
+  AvatarBadge
 } from "@chakra-ui/react"
 
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
@@ -31,7 +26,6 @@ const ServerIcons = ({ data }: any) => {
   const activeChannel = Number(diskordState.activeChannel)
 
   function handleClickServer(id: number) {
-    console.log(id)
     dispatch(setSelectedServer(id))
     navigate(`/diskord/servers/${id}`)
   }
