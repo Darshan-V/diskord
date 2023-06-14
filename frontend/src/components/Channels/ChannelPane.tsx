@@ -27,7 +27,6 @@ const ChannelPane = () => {
   )
 
   const serverId = diskordState.activeServer
-  console.log(serverId)
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -36,7 +35,6 @@ const ChannelPane = () => {
     (item: { workSpaceId: number }) =>
       item.workSpaceId === Number(serverId)
   )
-  console.log(serverGroup)
 
   return (
     <div className="flex flex-col w-60 h-full bg-[#3f4147]">
