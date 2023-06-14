@@ -37,7 +37,7 @@ export default {
 
       // listen for new message and broadcast
       socket.on("new-msg", (msg) => {
-        // console.log(msg)
+        console.log(msg)
         const newMsg = {
           msgTxt: msg.msgTxt,
           msgTime: Date.now(),
