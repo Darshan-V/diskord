@@ -10,6 +10,7 @@ import {
   BsInboxFill
 } from "react-icons/bs"
 import diskData from "../../diskData.json"
+
 const MessageBoxHeader = () => {
   const [cnl, setCnl] = useState("")
   const icons = [
@@ -33,12 +34,15 @@ const MessageBoxHeader = () => {
   ]
 
   interface dState {
-    activeServer: string
-    activeChannel: string
-    socket: {}
+    diskord: {
+      activeServer: string
+      activeChannel: string
+    }
   }
 
-  const channelState = useSelector((state: dState) => state)
+  const channelState = useSelector(
+    (state: dState) => state.diskord
+  )
 
   function getChannelById(id: number, servers: any[]): any {
     for (let server of servers) {
