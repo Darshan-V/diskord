@@ -4,7 +4,7 @@ import { useGetWorkspacesQuery } from "../../store/services/diskordApi"
 
 const ServerSidebar = () => {
   const { data, isLoading } = useGetWorkspacesQuery()
-  console.log(data)
+
   if (isLoading) {
     return <div>Loading..</div>
   }

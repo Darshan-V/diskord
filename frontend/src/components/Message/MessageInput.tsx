@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useAppDispatch } from "../../store/store"
 import { setSelectedServer } from "../../store/features/diskord/diskordSlice"
-
-// const socket = io("http://localhost:3000")
+import socket from "../../socket"
 
 const MessageInput = (props: { setMessages: any }) => {
   const [value, setValue] = useState("")
@@ -14,17 +13,22 @@ const MessageInput = (props: { setMessages: any }) => {
   const dispatch: useAppDispatch = useDispatch()
 
   interface dState {
-    activeServer: string
-    activeChannel: string
+    diskord: {
+      activeServer: string
+      activeChannel: string
+    }
   }
-  const diskordState = useSelector((state: dState) => state)
-  const socket = useSelector((state: any) => state.socket)
+  const diskordState = useSelector(
+    (state: dState) => state.diskord
+  )
+
   interface bMsg {
     self: boolean
     msgTxt: string
     msgTime: string
     channelId: number
     logMsg: boolean
+    user: string
   }
 
   useEffect(() => {
@@ -42,6 +46,7 @@ const MessageInput = (props: { setMessages: any }) => {
 
     socket.on("broadcast-msg", (msg: bMsg) => {
       msg.self = false
+      msg.user = navigator.userAgent
       props.setMessages((currentMsgs: any) => {
         return [...currentMsgs, msg]
       })
@@ -57,14 +62,15 @@ const MessageInput = (props: { setMessages: any }) => {
   const newMessage = {
     msgTxt: value,
     channelId: Number(diskordState.activeChannel),
-    self: true
+    self: true,
+    user: navigator.userAgent
   }
 
   const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
-    // console.log(value)
+    console.log(newMessage)
     socket.emit("new-msg", newMessage)
     props.setMessages((currentMessages: []) => {
       return [...currentMessages, newMessage]

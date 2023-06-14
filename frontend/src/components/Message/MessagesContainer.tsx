@@ -11,14 +11,18 @@ import {
 
 const MessagesContainer = () => {
   interface dState {
-    activeChannel: string
-    activeServer: string
+    diskord: {
+      activeServer: string
+      activeChannel: string
+    }
   }
 
   const dispatch = useDispatch()
 
   const [messages, setMessages] = useState<[]>([])
-  const appState = useSelector((state: dState) => state)
+  const appState = useSelector(
+    (state: dState) => state.diskord
+  )
   const channelId = appState.activeChannel
   const serverId = appState.activeServer
   const params = useParams()
@@ -34,7 +38,7 @@ const MessagesContainer = () => {
       {channelId &&
       serverId &&
       params.channelId === String(channelId) ? (
-        <div className="flex flex-col w-full h-screen  bg-[#252526]">
+        <div className="flex flex-col w-full h-full  bg-[#252526]">
           <MessageBoxHeader />
           <MessageBox messages={messages} />
           <MessageInput setMessages={setMessages} />

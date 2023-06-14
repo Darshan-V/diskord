@@ -8,10 +8,14 @@ const MessageCard = (props: {
   // console.log(props.messages)
 
   interface dState {
-    activeServer: string
-    activeChannel: string
+    diskord: {
+      activeServer: string
+      activeChannel: string
+    }
   }
-  const diskordState = useSelector((state: dState) => state)
+  const diskordState = useSelector(
+    (state: dState) => state.diskord
+  )
   const activeChannel = diskordState.activeChannel
 
   return (
@@ -32,7 +36,7 @@ const MessageCard = (props: {
                 />
                 <div className="flex flex-col w-full h-full pr-2 pl-2">
                   <span className="text-gray-100 text-md font-sans">
-                    User name
+                    {message.user}
                   </span>
                   <span className="text-gray-400 text-md pl-2">
                     {message.msgTxt}

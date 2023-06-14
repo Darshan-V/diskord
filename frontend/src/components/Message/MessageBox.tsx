@@ -8,10 +8,14 @@ const MessageBox = (props: {
 }): JSX.Element => {
   const socket = useSelector((state: any) => state.socket)
   interface dState {
-    activeChannel: string
-    activeServer: string
+    diskord: {
+      activeServer: string
+      activeChannel: string
+    }
   }
-  const diskordState = useSelector((state: dState) => state)
+  const diskordState = useSelector(
+    (state: dState) => state.diskord
+  )
   const serverId = Number(diskordState.activeServer)
   const channelId = Number(diskordState.activeChannel)
 
